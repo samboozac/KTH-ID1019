@@ -1,27 +1,32 @@
 defmodule Math do
 
     def sum(a, b) do
-        a + b
+        IO.puts a + b
     end
 
     def sub(a, b) do
-        a - b
+        IO.puts a - b
     end
 
     def mult(a, b) do
-        a * b
+        IO.puts a * b
     end
 
     def div(a, b) do
         if (b === 0) do 
             IO.puts "You can't divide by 0 (Zero)"
         else
-            a / b
+            IO.puts a / b
         end
     end
 
     def pi do
-        3.14
+        IO.puts 3.14
     end
 
+    def len(a) do 
+        IO.puts(String.length(a))
+    end
+    
+    # rem(5, 2) gives the remainder of 5 /2 --> 1
 end
