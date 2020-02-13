@@ -63,5 +63,36 @@ defmodule Lists do
         end
     end
 
-    
+    #  OK, but without Enum? 
+    def add2(elem, []) do [] end
+    def add2(elem, list) do
+        if Enum.member?(list, elem) do
+            list
+        else    
+            list++[elem]
+        end
+    end 
+
+    # Reverse a list ( [1,2,3] --> [3,2,1] )
+    def reverse(list) do reverse(list, []) end
+    def reverse([], new_list) do new_list end
+    def reverse([head | tail], new_list) do
+        reverse(tail, [head | new_list])
+    end
+
+    # Recursive remove (remove and element if there is one..)
+    # First call (2 params..)
+    def remove(elem, list) do remove(elem, list, []) end
+    # if the item exists
+    def remove(elem, [head | tail], new_list) when head == elem do
+        remove(elem, tail, new_list)
+    end
+    # Put the head in the new_list
+    def remove(elem, [head | tail], new_list) do
+        remove(elem, tail, [head | new_list])
+    end
+    # Last call when the list is empty, reverse the list back to normal
+    def remove(elem, [], new_list) do
+        Enum.reverse(new_list)
+    end
 end
