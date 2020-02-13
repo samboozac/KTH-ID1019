@@ -13,4 +13,13 @@ defmodule Lists do
     def test do
         [1,2,3,4]
     end
+
+    def tak(list) do
+        Enum.at(list, 0)
+    end
+
+    def drp(list) do
+        [head | tail] = list
+        tail
+    end
 end
