@@ -80,6 +80,57 @@ defmodule Lists do
         reverse(tail, [head | new_list])
     end
 
+    # (Using the fast append function)
+    def reverse2([]) do [] end
+    def reverse2([head | tail]) do
+        append3(reverse2(tail), [head])
+    end
+
+    # Same as first reverse ^^
+    def reverse3(list) do reverse3(list, []) end
+    def reverse3([], done) do done end
+    def reverse3([head | tail], new_list) do 
+        reverse3(tail, [head | new_list])
+    end
+
+    # reverse3 - rev3, much faster...
+    # Performance Test ===========================================================================================================================
+    def bench() do
+        ls = [16, 32, 64, 128, 256, 512]
+        n = 100
+        # bench is a closure: a function with an environment.
+        bench = fn(l) ->
+            seq = Enum.to_list(1..l)
+            tn = time(n, fn -> reverse2(seq) end)
+            tr = time(n, fn -> reverse3(seq) end)
+            :io.format("length: ~10w  rev2: ~8w us    rev3: ~8w us~n", [l, tn, tr])
+        end
+
+        # We use the library function Enum.each that will call
+        # bench(l) for each element l in ls
+        Enum.each(ls, bench)
+    end
+
+        # Time the execution time of the a function.
+        def time(n, fun) do
+            start = System.monotonic_time(:milliseconds)
+            loop(n, fun)
+            stop = System.monotonic_time(:milliseconds)
+            stop - start
+        end
+
+        # Apply the function n times.
+        def loop(n, fun) do
+            if n == 0 do
+                :ok
+            else
+                fun.()
+                loop(n - 1, fun)
+            end
+        end
+        # ========================================================================================================================================
+
+
     # Recursive remove (remove and element if there is one..)
     # First call (2 params..)
     def remove(elem, list) do remove(elem, list, []) end
@@ -126,5 +177,38 @@ defmodule Lists do
         Enum.uniq(list)
     end
 
-    
+    # Append
+    # standard
+    def append(l1, l2) do
+        l1 ++ l2
+    end
+    # Alt
+    def append2(l1, l2) do
+        Enum.concat(l1, l2)
+    end
+    # Quickest..
+    def append3([h | t], tail) do
+        [h | append(t, tail)]
+    end
+    def append3([], tail) do
+        tail
+    end
+
+    # max(list) - Returns the max value in a list
+    def max(list) do _max(list, nil) end
+    # Private functions ========================================================================
+    defp _max([], current_max) do current_max end
+    defp _max([head | tail], current_max) when is_nil(current_max) do _max(tail, head) end
+    defp _max([head | tail], current_max) when head >= current_max do _max(tail, head) end
+    defp _max([head | tail], current_max) when head < current_max do _max(tail, current_max) end
+    # ==========================================================================================
+
+    # max2(list) - defp "definition private" often renamed to _functionName
+    # Only max(list) can be accessed in public. 
+    def max2(list) do _max2(list, 0) end
+    defp _max2([], max) do max end
+    defp _max2([h | t], curr_max) when curr_max == 0 do _max2(t, h) end
+    defp _max2([h | t], curr_max) when h >= curr_max do _max2(t, h) end
+    defp _max2([h | t], curr_max) when h < curr_max do _max2(t, curr_max) end
+
 end
