@@ -210,5 +210,5 @@ defmodule Lists do
     defp _max2([h | t], curr_max) when curr_max == 0 do _max2(t, h) end
     defp _max2([h | t], curr_max) when h >= curr_max do _max2(t, h) end
     defp _max2([h | t], curr_max) when h < curr_max do _max2(t, curr_max) end
-
+    
 end
