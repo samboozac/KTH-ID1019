@@ -95,4 +95,36 @@ defmodule Lists do
     def remove(elem, [], new_list) do
         Enum.reverse(new_list)
     end
+
+    # remove2 OK - using reverse..
+    def remove2(el, list) do remove2(el, list, []) end
+    def remove2(el, [h | t], new_list) when h == el do
+        remove2(el, t, new_list)
+    end
+    def remove2(el, [h | t], new_list) do
+        remove2(el, t, [h | new_list])
+    end
+    def remove2(el, [], new_list) do 
+        reverse(new_list)
+    end
+
+    # Prints a list where all numbers are unique..
+    def unique(list) do unique(list, []) end
+    def unique([head | tail], new_list) do
+        if Enum.member?(new_list, head) do
+            unique(tail, new_list)
+        else
+            [head | unique(tail, [head | new_list])]
+        end
+    end
+    def unique([], _) do
+        []
+    end
+
+    # Alt
+    def unique2(list) do 
+        Enum.uniq(list)
+    end
+
+    
 end
