@@ -1,0 +1,46 @@
+Functional Programming
+- Modular
+- Mathematical (Easy to prove correctness)
+- Less error prone (More reliable, stable, less bugs due to not allowed sideeffects)
+
+Functional Programming Style
+- Avoid mutation and side effects
+- No features required
+- map, filter, reduce
+
+Why isn't the FP style the norm? - Young, takes time.
+- No sufficient large "killer apps"
+- No exclusive large platforms
+- Can't be a quick upgrade if substantially different
+- No epic marketing budgets
+- Slow and steady growth takes decades
+
+OO languages the norm because of uniquely OO features? 
+- Encapsulation -> Can be done with Modules
+- Inheritance -> Composition is encouraged
+- Without Inheritance, Objects and Methods -> Not different from Structs and Procedures
+
+Lambda Calculus
+- A system of mathematical ligic for describing computations based on functions (variable binding and substitution)
+- A model of computation (Building the Turing machine)
+- Common Ancestor for all Functional languages today
+
+Functional languages
+- LISP
+- Scheme (Academical and Research focused)
+- ML (static typing, pattern matching etc..)
+- Erlang (From an R&D Ericsson, introduces concurrency)
+- Miranda (From ML)
+- Haskell (Borrows from Miranda)
+- Scala (Functional langauge running on the JVM, OOP)
+- F# (From ML, build on .NET)
+- Clojure (Ran on JVM, addopts LISP)
+- Akka
+- Rust (Functional core ideas)
+- Elixir (Ran on the Erlang VM)
+
+Concurrency, Modern Distributed Systems, Recursion
+
+
+Erlang --> Elixir
+- 
