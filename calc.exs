@@ -17,6 +17,7 @@ defmodule Calc do
 
 
     # Find the value of a variable given a list of bindings ======================================
+    # [_ | tail]: The '_' (undescore) will ignore an argument in a pattern match..
     def lookup({:var, name}, [{:bind, var, value} | _]) when name == var do value end
     def lookup(var, [_ | rest]) do lookup(var, rest) end
 
