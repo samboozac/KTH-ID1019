@@ -14,7 +14,7 @@ defmodule Insertion do
     def _sort(sorted_list, []) do sorted_list end
     def _sort([], [head | tail]) do _sort([head], tail) end
     def _sort(sorted_list, [head | tail]) do
-        insert(head, sorted_list) |> _sort(tail)
+        _sort(insert(head, sorted_list), tail)
     end
     # The Algorithm =========================================
 
