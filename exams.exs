@@ -1,3 +1,7 @@
+# Written By: Sam Florin
+# Date: 2019-02-10
+# Description: Exam problems Solved
+
 defmodule Exams do 
     # ______________________________________________ 2014-01-16 _____________________________________________ #
     # ---------------------------------------------- Assign 1.1 --------------------------------------------- #
@@ -176,6 +180,68 @@ defmodule Exams do
         end
     end
     def filter(f, [first | rest], new_list) do filter(f, rest, new_list) end
-    # Classic Function to filter a list after a boolean expression (f) 
-    
+    # Classic Function to flatten a list
+    def flatten([]) do [] end
+    def flatten(list) do flatten(list, []) end
+    def flatten([], new_list) do reverse(new_list) end
+    def flatten([[] | rest], new_list) do flatten(rest, new_list) end
+    def flatten([first | rest], new_list) when is_list(first) do flatten(rest, flatten(first, new_list)) end
+    def flatten([first | rest], new_list) do flatten(rest, [first | new_list]) end
+
+    # Simple version of flatten.. 
+    def flatten2([]) do [] end
+    def flatten2([first | rest]) do flatten2(first) ++ flatten2(rest) end
+    def flatten2(first) do [first] end
+    # Tutti Paletti([1, -1, 3]) = 10 (filter() -> [1, 3] map() -> 1*1 + 3*3 = 10) OK
+    def tutti_paletti([]) do [] end
+    def tutti_paletti(list) do 
+        f = fn(x) -> cond do
+                x > 0 -> true
+                true -> false
+            end
+        end
+
+        f2 = fn(x) -> x*x end
+        tutti_paletti(map(f2, filter(f, list)), 0)
+    end
+    def tutti_paletti([], acc) do acc end
+    def tutti_paletti([first | rest], acc) do tutti_paletti(rest, acc + first) end
+    # ------------------------------------------------------------------------------------------------------- #
+    # ---------------------------------------------- Assign 3.3 --------------------------------------------- #
+    # fold - Left (AKA Reduce)
+    def foldl([]) do [] end 
+    def foldl(f, list) do foldl(f, list, 0) end
+    def foldl(f, [], acc) do acc end
+    def foldl(f, [first | rest], acc) do 
+        foldl(f, rest, acc + f.(first))
+    end
+    # fold - right (AKA Reduce)
+    def foldr([]) do [] end 
+    def foldr(f, list) do foldr(f, reverse(list), 0) end
+    def foldr(f, [], acc) do acc end
+    def foldr(f, [first | rest], acc) do 
+        foldr(f, rest, acc + f.(first))
+    end
+    # Append
+    def append(e, []) do [e] end
+    def append(e, list) do append(e, list, []) end
+    def append(e, [], new_list) do new_list end
+    def append(e, [first | rest], new_list) do 
+        [first | append(e, rest)]
+    end
+    # ------------------------------------------------------------------------------------------------------- #
+    # ---------------------------------------------- Assign 4.1 --------------------------------------------- #
+    # Time complexity? --> O'(N)
+    def member2(_, []) do false end
+    def member2(nil, _) do false end
+    def member2(e, [e | rest]) do true end
+    def member2(e, [d | rest]) do member2(e, rest) end
+    # ------------------------------------------------------------------------------------------------------- #
+    # ---------------------------------------------- Assign 4.1 --------------------------------------------- #
+    # Lookup, implemented under "keyvalue_tables" --> O'(N^2) for lists in lists
+    # Binary Tree with good balance..
+    # Implement a Binary Tree (with Key-Value pairs)
+    # - Insert
+    # - Lookup
+# Module End
 end
