@@ -30,11 +30,11 @@ defmodule Binary_tree do
     # Takes an element and a tree and returns a new tree with the elemented inserted correctly
     # Binary Tree insert =======================================================
     # NOT WORKING?????
-    def insert(e, :nil) do {:leaf, e} end
-    def insert(e, {:leaf, v}) when e < v do {:node, v, insert(e, :nil), :nil} end
-    def insert(e, {:leaf, v}) do {:node, v, :nil, insert(e, :nil)} end
-    def insert(e, {:node, v, l, r}) when e < v do insert(e, l) end
-    def insert(e, {:node, v, l, r}) do insert(e, r) end
+    def insert(e, nil) do {:leaf, e} end
+    def insert(e, {:leaf, d}) when e >= d do {:node, d, nil, {:leaf, e}} end
+    def insert(e, {:leaf, d}) when e < d do {:node, d, {:leaf, e}, nil} end
+    def insert(e, {:node, d, left, right}) when e >= d do {:node, d, left, insert(e, right)} end
+    def insert(e, {:node, d, left, right}) when e < d do {:node, d, insert(e, left), right} end
     # Binary Tree insert =======================================================
 
 
