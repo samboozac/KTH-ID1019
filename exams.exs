@@ -149,4 +149,33 @@ defmodule Exams do
     end
     # ------------------------------------------------------------------------------------------------------- #
     # ---------------------------------------------- Assign 3.1 --------------------------------------------- #
+    # Classic Function to map an operation on a list (f) 
+    def map(f, []) do [] end
+    def map(f, list) do map(f, list, []) end
+    def map(f, [], new_list) do reverse(new_list) end
+    def map(f, [first | rest], new_list) do 
+        map(f, rest, [f.(first) | new_list])
+    end
+    # Helper
+    def reverse([]) do [] end
+    def reverse(list) do reverse(list, []) end
+    def reverse([], new_list) do new_list end
+    def reverse([first | rest], new_list) do 
+        reverse(rest, [first | new_list]) 
+    end
+    # ------------------------------------------------------------------------------------------------------- #
+    # ---------------------------------------------- Assign 3.2 --------------------------------------------- #
+    # Classic Function to filter a list after a boolean expression (f) 
+    def filter(f, []) do [] end
+    def filter(f, list) do filter(f, list, []) end
+    def filter(f, [], new_list) do reverse(new_list) end
+    def filter(f, [first | rest], new_list) do 
+        cond do 
+            f.(first) == true -> filter(f, rest, [first | new_list]) 
+            true -> filter(f, rest, new_list) 
+        end
+    end
+    def filter(f, [first | rest], new_list) do filter(f, rest, new_list) end
+    # Classic Function to filter a list after a boolean expression (f) 
+    
 end
