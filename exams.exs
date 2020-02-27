@@ -243,5 +243,30 @@ defmodule Exams do
     # Implement a Binary Tree (with Key-Value pairs)
     # - Insert
     # - Lookup
+    # Empty Tree: nil
+    # Leaf: {:leaf, key, value}
+    # Node: {:node, key, value, left, right}
+    # KV Binary Tree - Set the KV yourself..
+    def put({key, value}, nil) do {:leaf, key, value} end
+    def put({key, value}, {:leaf, key2, value2}) when key >= key2 do {:node, key2, value2, nil, {:leaf, key, value}} end    
+    def put({key, value}, {:leaf, key2, value2}) do {:node, key2, value2, {:leaf, key, value}, nil} end
+    def put({key, value}, {:node, key2, value2, left, right}) when key >= key2 do {:node, key2, value2, left, put({key, value}, right)} end
+    def put({key, value}, {:node, key2, value2, left, right}) do {:node, key2, value2, put({key, value}, left), right} end
+    # KV Binary Tree - Counting frequency of keys
+    def put(k, nil) do {:leaf, k, 1} end
+    def put(k, {:leaf, k, v}) do {:leaf, k, v + 1} end 
+    def put(k, {:leaf, k2, v2}) when k < k2 do {:node, k2, v2, {:leaf, k, 1}, nil} end
+    def put(k, {:leaf, k2, v2}) when k > k2 do {:node, k2, v2, nil, {:leaf, k, 1}} end
+    def put(k, {:node, k, v, l, r}) do {:node, k, v + 1, l, r} end
+    def put(k, {:node, k2, v2, l, r}) when k < k2 do {:node, k2, v2, put(k, l), r} end
+    def put(k, {:node, k2, v2, l, r}) when k > k2 do {:node, k2, v2, l, put(k, r)} end
+    # Asymptotic time complexity is O(lg(n)) if the tree has OK balance
+    def lookup(nil, _) do "Invalid Key" end
+    def lookup(k, nil) do "No such Key in the Tree" end
+    def lookup(k, {:leaf, k, v}) do v end
+    def lookup(k, {:leaf, k2, v2}) do "No such Key in the Tree" end 
+    def lookup(k, {:node, k, v, l, r}) do v end 
+    def lookup(k, {:node, k2, v2, l, r}) when k > k2 do lookup(k, r) end 
+    def lookup(k, {:node, k2, v2, l, r}) when k < k2 do lookup(k, l) end 
 # Module End
 end
