@@ -1,8 +1,8 @@
 # Written By: Sam Florin
 # Date: 2019-02-10
-# Description: Exam problems Solved
+# Description: Exam 2014-01-16 problems solved independently (Solutions not optimal)
 
-defmodule Exams do 
+defmodule Exam_solved do 
     # ______________________________________________ 2014-01-16 _____________________________________________ #
     # ---------------------------------------------- Assign 1.1 --------------------------------------------- #
     # TwoThree-Tree
