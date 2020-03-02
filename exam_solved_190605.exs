@@ -103,6 +103,62 @@ defmodule Exam_solved2 do
     def bfs({:node, value, left, right}) do 
 
     end
+
+    # ------------------------------------------------------------------------------------------------------- #
+    # ---------------------------------------------- Assign 4.0 --------------------------------------------- #
+    # version 1
+    def hp35([]) do nil end
+    def hp35(list) do hp35(list, [], 0) end
+    def hp35([], stack, acc) do acc end
+    def hp35([:sub | t], [f | rest] = stack, acc) do hp35(t, stack, acc + pop(stack) - pop(rest)) end
+    def hp35([:add | t], [f | rest] = stack, acc) do hp35(t, stack, acc + pop(stack) + pop(rest)) end
+    def hp35([:mul | t], [f | rest] = stack, acc) do hp35(t, stack, acc + pop(stack) * pop(rest)) end
+    def hp35([:div | t], [f | rest] = stack, acc) do hp35(t, stack, acc + pop(stack) / pop(rest)) end
+    def hp35([h | t], stack, acc) do hp35(t, [h | stack], acc) end
+
+    # version 2
+    def hp350([]) do nil end
+    def hp350(list) do hp350(list, [0, 0]) end
+    def hp350([], [result | rest]) do result end
+    def hp350([:sub | t] = input, [acc | r] = stack) do 
+        [f1 | r1] = r
+        [f2 | r2] = r1
+        hp350(t, [(acc + f2 - f1) | stack])
+    end
+    def hp350([:add | t] = input, [acc | r] = stack) do 
+        [f1 | r1] = r
+        [f2 | r2] = r1
+        hp350(t, [(acc + f2 + f1) | stack])
+    end
+    def hp350([h | t], stack) do hp350(t, [h | stack]) end
+
+
+    # Stack helpers Push / Pop (list stack, FIFO)
+    def push(nil, list) do list end
+    def push(e, []) do [e] end
+    def push(e, list) do [e | list] end
+    def pop([]) do [] end
+    def pop([h | t]) do h end
+
+    # ------------------------------------------------------------------------------------------------------- #
+    # ---------------------------------------------- Assign 4.0 --------------------------------------------- #
+    # Good and simple Pascal
+    def pascal(1) do [1] end
+    def pascal(n) do [1 | next(pascal(n-1))] end
+
+    def next([1]) do [1] end
+    def next([f1 | r1]) do 
+        [f2 | r2] = r1
+        [f1 + f2 | next(r1)]
+    end
+
+    # 
+    def pasc(1) do [1] end
+    def pasc(n) do [1 | gen(pasc(n-1))] end
+
+    def gen([1]) do [1] end
+    def gen([h | t]) do [h2 | t2] = t; [h + h2 | gen(t)] end
+
     
 # Module End
 end
