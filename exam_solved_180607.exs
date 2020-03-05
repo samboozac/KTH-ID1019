@@ -26,10 +26,28 @@ defmodule Exam_solved4 do
     # ------------------------------------------------------------------------------------------------------- #
     # ---------------------------------------------- Assign 4.0 --------------------------------------------- #
     # Fairly balanced - ret {:ok, depth} of a treee is fairly balanced or :no if the difference in depth is more than 1
-    def fairly(nil) do nil end
-    def fairly({:node, value, left, right}) do {:ok} end
-    def fairly({:node, value, left, right}) do {:no} end
-    def fairly({:node, value, left, right}) do fairly(left) end
-    def fairly({:node, value, left, right}) do fairly(right) end
+    def fairly(nil) do {:ok, 0} end
+    def fairly({:node, value, left, right}) do 
+        case fairly(left) do
+            {:ok, l} -> 
+                case fairly(right) do 
+                    {:ok, r} -> 
+                        if abs(r-l) < 2 do
+                            {:ok, 1 + max(l, r)}
+                        else
+                            :no
+                        end
+                    :no -> :no
+                end
+            :no -> :no
+        end
+    end
+
+    def depth(nil) do {:depth, 0} end
+    def depth({:node, value, left, right}) do 
+        {:depth, ld} = depth(left)
+        {:depth, rd} = depth(right)
+        {:depth, max(ld, rd) + 1}
+    end
 # Module End
 end
