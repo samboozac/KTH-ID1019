@@ -23,6 +23,13 @@ defmodule Exam_solved4 do
     def fizzbuzz(current, n, 3, j) do [:fizz | fizzbuzz(current+1, n-1, 1, j+1)] end
     def fizzbuzz(current, n, i, 5) do [:buzz | fizzbuzz(current+1, n-1, i+1, 1)] end
     def fizzbuzz(current, n, i, j) do [current | fizzbuzz(current+1, n-1, i+1, j+1)] end
-
+    # ------------------------------------------------------------------------------------------------------- #
+    # ---------------------------------------------- Assign 4.0 --------------------------------------------- #
+    # Fairly balanced - ret {:ok, depth} of a treee is fairly balanced or :no if the difference in depth is more than 1
+    def fairly(nil) do nil end
+    def fairly({:node, value, left, right}) do {:ok} end
+    def fairly({:node, value, left, right}) do {:no} end
+    def fairly({:node, value, left, right}) do fairly(left) end
+    def fairly({:node, value, left, right}) do fairly(right) end
 # Module End
 end
