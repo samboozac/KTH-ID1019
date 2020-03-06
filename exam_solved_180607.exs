@@ -78,5 +78,20 @@ defmodule Exam_solved4 do
                 end
             end)
     end
+    # ------------------------------------------------------------------------------------------------------- #
+    # ---------------------------------------------- Assign 6.0 --------------------------------------------- #
+    # Implement the process and a function dillinger/0 that starts the process
+    # Simple State diagram: 
+    # start -> NYC -- {:knife} --> knife -- {:fork} --> fork -- {:bottle} --> bottle -- {:cork} --> NYC
+    # Create a process (spawn/1)
+    # Send a message to a process (send/2)
+    # recieve a message on a process (receive/0)
+    def dillinger() do 
+        spawn(fn() -> nyc() end)
+    end
+    def nyc() do receive do IO.puts("Hey Joe!"); :knife -> knife() end end
+    def knife() do receive do :fork -> fork() end end
+    def fork() do receive do :bottle -> bottle() end end
+    def bottle() do receive do :cork -> nyc() end end
 # Module End
 end
