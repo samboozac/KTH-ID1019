@@ -49,5 +49,34 @@ defmodule Exam_solved4 do
         {:depth, rd} = depth(right)
         {:depth, max(ld, rd) + 1}
     end
+    # ------------------------------------------------------------------------------------------------------- #
+    # ---------------------------------------------- Assign 5.0 --------------------------------------------- #
+    # Instead of time complexity of insertion sort O(N^2), n is length of list. Construct the sort!
+    def sort([]) do [] end
+    def sort(list) do sort(list, []) end
+    def sort([], sorted) do sorted end
+    def sort([h | t], sorted) do sort(t, insert(h, sorted)) end
+
+    def insert(e, []) do [e] end
+    def insert(e, [h | t ]) when e < h do [e | insert(h, t)] end
+    def insert(e, [h | t ]) do [h | insert(e, t)] end
+    # ------------------------------------------------------------------------------------------------------- #
+    # ---------------------------------------------- Assign 5.0 --------------------------------------------- #
+    # Instead of time complexity of a direceted acyclic graph O(k^n), n is number of  vertices and k is the branching factor. Construct the graph!
+    # Representation of a graph - @type graph :: {:node, any(), [graph() | nil]}
+    def search(_, :nil) do :fail end
+    def search(e, {:node, e, _}) do :found end
+    def search(e, {:node, _, paths}) do
+        List.foldl(paths,
+            :fail, 
+            fn(p, a) -> 
+                case a do
+                    :found -> 
+                        :found
+                    :fail -> 
+                        search(e, p)
+                end
+            end)
+    end
 # Module End
 end
